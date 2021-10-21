@@ -1,0 +1,2 @@
+[04-Mar-2021 21:05:24 Asia/Baku] PHP Fatal error:  Cannot use Mail as Mail because the name is already in use in /home/brituseb/demo.ecommerce.inova.az/app/Http/Controllers/Customer/UserController.php on line 22
+[04-Mar-2021 21:07:16 Asia/Baku] PHP Fatal error:  Cannot use Mail as Mail because the name is already in use in /home/brituseb/demo.ecommerce.inova.az/app/Http/Controllers/Customer/UserController.php on line 22
