@@ -348,6 +348,8 @@
                 }
                 ajaxFormPost(formData, "{{ route('manage.slider.save') }}");
             });
+            hsdfhsdyfug
+            sdfsdf
         })
         /// Ajax Function
         function ajaxFormPost(formData, actionURL) {
