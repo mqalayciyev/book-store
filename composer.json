@@ -12,6 +12,7 @@
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
         "laraveldaily/laravel-invoices": "^2.0",
+        "mcamara/laravel-localization": "^1.6",
         "yajra/laravel-datatables-oracle": "~8.0"
     },
     "require-dev": {

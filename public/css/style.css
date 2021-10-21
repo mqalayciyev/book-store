@@ -397,7 +397,7 @@ textarea.input {
 
 .header-search {
   display: inline-block;
-  padding: 15px 0px;
+  padding: 15px 0px 15px 15px;
   max-width: 100%;
 }
 
@@ -2048,4 +2048,9 @@ textarea.input {
   font-weight: bold;
   color: #573ba3;
   text-shadow: 1px 1px 1px #2b0f42;
+}
+
+
+.p-0{
+  padding: 0px;
 }

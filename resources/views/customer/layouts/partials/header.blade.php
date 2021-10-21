@@ -5,24 +5,44 @@
         <div class="container">
             <div class="mobile-navbar">
                 <div style="width: 100%;">
-                    
+
                     <!-- Mobile nav toggle-->
-                    
+
                     <!-- / Mobile nav toggle -->
-                    <ul
-                     class="header-btns clearfix " style="width: 100%;">
-                     <li>
-                        <div class="header-logo" style="max-width: 38vw;">
-                            <a class="logo" href="/">
-                                <img src="{{ asset('img/' . old('logo', $website_info->logo)) }}" alt="">
-                            </a>
-                        </div>
-                     </li>
-                     <li style="float: right; margin-left: 15px;">
-                        <div class="nav-toggle " style="padding: 0px">
-                            <button class="nav-toggle-btn main-btn icon-btn"><i class="fa fa-bars"></i></button>
-                        </div>
-                    </li>
+                    <ul class="header-btns clearfix " style="width: 100%;">
+                        <li>
+                            <div class="header-logo" style="max-width: 38vw;">
+                                <a class="logo" href="/">
+                                    <img src="{{ asset('img/' . old('logo', $website_info->logo)) }}" alt="">
+                                </a>
+                            </div>
+                        </li>
+                        <li style="float: right; margin-left: 15px;">
+                            <div class="nav-toggle " style="padding: 0px">
+                                <button class="nav-toggle-btn main-btn icon-btn"><i class="fa fa-bars"></i></button>
+                            </div>
+                        </li>
+                        <li class="header-language dropdown default-dropdown" style="float: right">
+                            <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
+                                <div class="text-uppercase header-btns-icon">
+                                    <img src="{{asset('img/flag/'.App::getLocale().'.png')}}" width="25px" height="20px" alt="language">
+                                </div>
+                            </div>
+                            <ul class="custom-menu">
+                                @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                    @if (LaravelLocalization::getCurrentLocaleName() !== $properties['name'])
+                                        <li>
+                                            <a rel="alternate" hreflang="{{ $localeCode }}"
+                                                href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                                <img src="{{ asset('img/flag/' . $localeCode . '.png') }}" width="25px"
+                                                    height="20px" alt="language">
+                                                {{ $properties['name'] }}
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </li>
                         <li class="header-account dropdown" style="float: right;">
                             <div class="dropdown-toggle" role="button" data-toggle="dropdown">
                                 <div class="header-btns-icon">
@@ -92,42 +112,66 @@
                                 </div>
                             </div>
                         </li>
-                        
+
                     </ul>
                     <div class="header-search" style="width: 100%">
                         <form action="{{ route('search_product') }}" method="post" autocomplete="off">
                             {{ csrf_field() }}
-                            <input class="input" type="text" style="padding: 0 40px;" name="wanted"
+                            <input class="input" type="text" style="padding: 0 40px 0 10px;" name="wanted"
                                 value="{{ old('wanted') }}" placeholder="@lang('header.Enter your keyword')">
-                            <button class="search-btn" type="submit" value="1"><i class="fa fa-search"></i></button>
+                            <button class="search-btn" type="submit" value="1"><i
+                                    class="fa fa-search"></i></button>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="pull-left desktop-navbar">
+            <div class="pull-left desktop-navbar col-md-7 p-0">
 
                 <!-- Logo -->
-        
+
                 <!-- /Logo -->
-                <div class="header-logo" style="width: 150px; margin-right: 0px;">
+                <div class="header-logo col-md-4 p-0" style="width: 150px; margin-right: 0px;">
                     <a class="logo" href="/">
                         <img src="{{ asset('img/' . old('logo', $website_info->logo)) }}" alt="">
                     </a>
                 </div>
 
                 <!-- Search -->
-                <div class="header-search">
+                <div class="header-search col-md-8 text-center">
                     <form action="{{ route('search_product') }}" method="post" autocomplete="off">
                         {{ csrf_field() }}
-                        <input class="input" type="search" style="padding: 0 40px;" name="wanted"
+                        <input class="input" type="search" style="padding: 0 40px 0 10px;" name="wanted"
                             value="{{ old('wanted') }}" placeholder="@lang('header.Enter your keyword')">
                         <button class="search-btn" type="submit" value="1"><i class="fa fa-search"></i></button>
                     </form>
                 </div>
+                
+
                 <!-- /Search -->
             </div>
-            <div class="pull-right desktop-navbar">
+            <div class="pull-right desktop-navbar col-md-5 p-0">
                 <ul class="header-btns">
+                    <li class="header-language dropdown default-dropdown">
+                        <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
+                            <div class="header-btns-icon" style="margin: 0">
+                                <img src="{{asset('img/flag/'.App::getLocale().'.png')}}" width="25px" height="20px" alt="language">
+                            </div>
+                        </div>
+                        <ul class="custom-menu">
+                            @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                @if (LaravelLocalization::getCurrentLocaleName() !== $properties['name'])
+                                    <li>
+                                        <a rel="alternate" hreflang="{{ $localeCode }}"
+                                            href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                            <img src="{{ asset('img/flag/' . $localeCode . '.png') }}" width="25px"
+                                                height="20px" alt="language">
+                                            {{ $properties['name'] }}
+                                        </a>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </li>
                     <!-- Account -->
                     <li class="header-account dropdown default-dropdown">
                         <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
@@ -193,7 +237,8 @@
                                                 </div>
                                                 <div class="product-body">
                                                     <h3 class="product-price">{{ $productCartItem->price }} ₼<span
-                                                            class="qty"> x {{ $productCartItem->qty }}</span></h3>
+                                                            class="qty"> x
+                                                            {{ $productCartItem->qty }}</span></h3>
                                                     <h2 class="product-name"><a
                                                             href="{{ route('product', $productCartItem->options->slug) }}">{{ $productCartItem->name }}</a>
                                                     </h2>
@@ -202,8 +247,9 @@
                                         @endforeach
                                     </div>
                                     <div class="shopping-cart-btns">
-                                        <a href="{{ route('cart') }}" class="main-btn btn-block text-center">@lang('header.View Cart')</a>
-                                        
+                                        <a href="{{ route('cart') }}"
+                                            class="main-btn btn-block text-center">@lang('header.View Cart')</a>
+
                                     </div>
                                 @else
                                     @lang('header.Empty, there is no product')
