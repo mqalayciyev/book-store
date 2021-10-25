@@ -12,40 +12,23 @@
 <div class="section">
     <div class="container">
         <div class="myAccountPage myAccountStyle">
-            <div class="section-title"><h3 class="title">Mənim Hesabım</h3></div>
+            <div class="section-title"><h3 class="title">@lang('header.My Account')</h3></div>
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12 MyAccountMenu">
 
                     <div class="panel-group accountMenu" id="accordion-2" role="tablist" aria-multiselectable="true">
                         <div class="panel">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion-2" href="#collapseOne-2" aria-expanded="true"
-                               aria-controls="collapseOne-2">
-                               İstifadəçi Məlumatları
-                                <i class="fa fa-angle-up" aria-hidden="true"></i>
-                            </a>
-                            <div id="collapseOne-2" class="panel-collapse collapse
-                                    {{
-                                        request()->is('orders') ||
-                                        request()->is('*/orders/*') ||
-                                        request()->is('membership') ||
-                                        request()->is('account')
-                                        ?
-                                        'in' :
-                                        ''
-                                     }}
-                                " role="tabpanel" aria-labelledby="headingOne">
-                                <ul class="accountSubMenu">
-                                    <li class="{{ request()->is('account') ? 'active' : '' }}">
-                                        <a href="{{ route('user.my_account') }}">
-                                            Hesabım
-                                        </a>
-                                    </li>
-                                    <li class="{{ request()->is('orders') || request()->is('*/orders/*') ? 'active' : '' }}"><a
-                                            href="{{ route('orders') }}">
-                                            Siparişlerim
-                                        </a></li>
-                                </ul>
-                            </div>
+                            <ul class="accountSubMenu">
+                                <li class="{{ url()->current() == route('user.my_account') ? 'active' : '' }}">
+                                    <a href="{{ route('user.my_account') }}">
+                                        @lang('header.My Account')
+                                    </a>
+                                </li>
+                                <li class="{{ url()->current() == route('orders')  ? 'active' : '' }}"><a
+                                        href="{{ route('orders') }}">
+                                        @lang('content.Orders')
+                                    </a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>

@@ -103,7 +103,7 @@
                                          alt="">
                                 </div>
                                 <div class="product-body">
-                                    <h3 class="product-price">{{ $product->sale_price }} ‎₼</h3>
+                                    <h3 class="product-price">{{ $product->sale_price }} $</h3>
                                     <div class="product-rating">
                                         @for($x=$product->detail->rating; $x>0; $x--)
                                             <i class="fa fa-star"></i>
@@ -116,9 +116,11 @@
                                         <a href="{{ route('product', $product->slug) }}">{{ $product->product_name }}</a>
                                     </h2>
                                     <div class="product-btns">
+                                        @auth
                                         <button type="button" class="main-btn icon-btn add-wish-list" id="{{ $product->id }}"
-                                                data-id="{{ $product->wish_list }}"><i
-                                                    class="fa fa-heart"></i></button>
+                                            data-id="{{ $product->wish_list }}"><i
+                                                class="fa fa-heart"></i></button>
+                                        @endauth
                                         <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
                                         <input type="hidden" name="id" value="{{ $product->id }}">
                                         <button type="submit" class="primary-btn add-to-cart" id="{{ $product->id }}">
@@ -165,10 +167,10 @@
                                                             @endif
                                                         </div>
                                                         <br>
-                                                        <h3 class="product-price">{{ $product->sale_price }}‎₼
+                                                        <h3 class="product-price">{{ $product->sale_price }}$
                                                             @if($product->discount>0)
                                                                 <del class="product-old-price">{{ $product->retail_price }}
-                                                                    ‎₼
+                                                                    $
                                                                 </del>
                                                             @endif
                                                         </h3>
@@ -193,7 +195,9 @@
                                                                 <i class="fa fa-shopping-cart"></i> @lang('content.Add to Cart')
                                                             </button>
                                                             <div class="pull-right">
+                                                                @auth
                                                                 <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
+                                                                @endauth
                                                                 <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
                                                             </div>
                                                         </div>

@@ -29,18 +29,18 @@
                     <form action="{{ route('contact.send') }}" method="post">
                         @csrf
                         <div class="form-group">
-                            <label for="name"><span style="color: red">*</span> Adınız</label>
+                            <label for="name"><span style="color: red">*</span> @lang('content.Your name')</label>
                             <input type="text" name="name" class="form-control" required id="name">
                         </div>
                         <div class="form-group">
-                            <label for="email"><span style="color: red">*</span> Email</label>
+                            <label for="email"><span style="color: red">*</span> @lang('content.Email')</label>
                             <input type="email" name="email" class="form-control" required id="email">
                         </div>
                         <div class="form-group">
-                            <label for="message"><span style="color: red">*</span> Mesajınız</label>
+                            <label for="message"><span style="color: red">*</span> @lang('content.Your message')</label>
                             <textarea type="text" name="message" class="form-control" rows="8" required id="message"></textarea>
                         </div>
-                        <button type="submit" class="primary-btn">Göndər</button>
+                        <button type="submit" class="primary-btn">@lang('content.Send')</button>
                     </form>
                 </div>
             </div>

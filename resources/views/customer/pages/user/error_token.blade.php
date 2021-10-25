@@ -14,7 +14,7 @@
                                 <div class="col-md-12">
                                     <h1>@lang('content.Error 404')</h1>
                                     <h2>@lang('content.Sorry, the page you are looking for could not be found!')</h2>
-                                    <a href="{{ route('user.sign_in') }}" class="primary-btn">Giriş Səhifəsinə Get</a>
+                                    <a href="{{ route('user.sign_in') }}" class="primary-btn">@lang('content.Go to Homepage')</a>
                                 </div>
                             </div>
                         </div>

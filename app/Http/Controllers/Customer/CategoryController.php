@@ -179,9 +179,6 @@ class CategoryController extends Controller
             ->whereIn('category_product.category_id', $id)
             ->orderBy(request('sorting_name'), request('order'))
             ->get();
-            foreach ($products as $key => $value) {
-                echo $value->sale_price;
-            }
         return view('customer.pages.single_product', compact('products'));
     }
 

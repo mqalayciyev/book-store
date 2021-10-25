@@ -143,16 +143,10 @@
 @section('footer')
     <script>
         $(function() {
-            var selector = "";
-            if (window.innerWidth >= 992) {
-                selector = "main"
-            } else {
-                selector = "mobile-filter-btn"
-            }
 
             $(document).on('click', '.sort_btn', function() {
                 var category_name = '{{ $slug_category_name }}';
-                var sorting_name = $(`#${selector} .select option:selected`).val();
+                var sorting_name = $(`#main .select option:selected`).val();
                 var order = $(this).attr('id');
                 var arrow = '';
                 if (order == 'desc') {
@@ -240,7 +234,6 @@
 
             function products() {
                 var category_name = '{{ $slug_category_name }}';
-                console.log(category_name);
                 $.ajax({
                     url: '{{ route('category.products') }}',
                     method: 'GET',
@@ -403,31 +396,8 @@
                 $("body").css('overflow', 'hidden')
             })
 
-            $(document).on('click', function(event) {
-                if (window.innerWidth < 992) {
-                    if (!$(event.target).hasClass('open-filters')) {
-                        if ($("#aside.filter-area").css("display") == 'block') {
-                            $("#aside.filter-area").css("display", 'none')
-                            $("body").css('overflow', 'auto')
-                        }
-                    }
 
-                }
 
-            })
-            window.onresize = reportWindowSize;
-
-            function reportWindowSize(event) {
-                console.log(window.innerWidth);
-                if (window.innerWidth > 992) {
-                    $("body").css('overflow', 'auto')
-                    $("#aside.filter-area").css("display", 'block')
-
-                } else {
-                    $("#aside.filter-area").css("display", 'none')
-                }
-
-            }
 
             // PRICE SLIDER
             var slider = document.getElementById('price-slider');

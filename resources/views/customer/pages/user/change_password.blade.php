@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-title">
-                        <h2 class="title">Şifrəni dəyiş</h2>
+                        <h2 class="title">@lang('content.Change Password')</h2>
                         <div class="pull-right">
                             <div class="product-slick-dots-2 custom-dots">
                             </div>
@@ -29,19 +29,19 @@
                             <input type="hidden" name="email" value="{{ $email }}">
                             <input type="hidden" name="token" value="{{ $token }}">
                             <div class="form-group">
-                                <label for="password">Yeni Şifrə</label>
+                                <label for="password">@lang('content.New Password')</label>
                                 <input class="input" type="password" required name="password" 
-                                       placeholder="Yeni şifrəni daxil edin">
+                                       placeholder="@lang('content.New Password')">
                             </div>
                             <div class="form-group">
-                                <label for="passsword_confirmation">Yeni Şifrə Təkrar</label>
+                                <label for="passsword_confirmation">@lang('content.Confirm Password')</label>
                                 <input class="input" type="password" required name="password_confirmation" 
-                                       placeholder="Şifrəni təsdiqləyin">
+                                       placeholder="@lang('content.Confirm Password')">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button type="submit" class="primary-btn">Şifrəni dəyiş</button>
+                                <button type="submit" class="primary-btn">@lang('content.Change Password')</button>
                             </div>
                         </div>
                     </form>

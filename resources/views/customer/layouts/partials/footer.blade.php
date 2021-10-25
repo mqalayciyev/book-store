@@ -14,18 +14,6 @@
                         </a>
                     </div>
                     <!-- /footer logo -->
-
-                    <p>@lang('footer.Your Address')</p>
-
-                    <!-- footer social -->
-                    <ul class="footer-social">
-                        <li><a href="{{ old('facebook', $website_info->facebook) }}"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="{{ old('twitter', $website_info->twitter) }}"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="{{ old('instagram', $website_info->instagram) }}"><i class="fa fa-instagram"></i></a></li>
-                        <li><a href="{{ old('youtube', $website_info->youtube) }}"><i class="fa fa-youtube"></i></a></li>
-                        <li><a href="{{ old('pinterest', $website_info->pinterest) }}"><i class="fa fa-pinterest"></i></a></li>
-                    </ul>
-                    <!-- /footer social -->
                 </div>
             </div>
             <!-- /footer widget -->
@@ -35,9 +23,9 @@
                 <div class="footer">
                     <h3 class="footer-header">@lang('footer.My Account')</h3>
                     <ul class="list-links">
+                        <li><a href="{{ route('compare') }}">@lang('header.Compare')</a></li>
                         <li><a href="/account">@lang('footer.My Account')</a></li>
                         <li><a href="/my_wish_list">@lang('footer.My Wishlist')</a></li>
-                        <li><a href="/cart">Checkout</a></li>
 
                     </ul>
                 </div>
@@ -63,13 +51,16 @@
             <div class="col-md-3 col-sm-6 col-xs-6">
                 <div class="footer">
                     <h3 class="footer-header">@lang('footer.Stay Connected')</h3>
-                    <p>@lang('footer.Subscribe to Our Newsletter')</p>
-                    <form>
-                        <div class="form-group">
-                            <input class="input" placeholder="@lang('footer.Enter Email Address')">
-                        </div>
-                        <button class="primary-btn">@lang('footer.Join Newsletter')</button>
-                    </form>
+
+                    <!-- footer social -->
+                    <ul class="footer-social">
+                        <li><a href="{{ old('facebook', $website_info->facebook) }}"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="{{ old('twitter', $website_info->twitter) }}"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="{{ old('instagram', $website_info->instagram) }}"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="{{ old('youtube', $website_info->youtube) }}"><i class="fa fa-youtube"></i></a></li>
+                        <li><a href="{{ old('pinterest', $website_info->pinterest) }}"><i class="fa fa-pinterest"></i></a></li>
+                    </ul>
+                    <!-- /footer social -->
                 </div>
             </div>
             <!-- /footer subscribe -->
@@ -87,9 +78,7 @@
                         @lang('footer.All rights reserved')
                     </div>
                     <div class="col-md-6 text-right"  style="padding: 0px;">
-                        <span>Bu sayt</span>
-                        <a href="https://inova.az/"><img src="https://inova.az/image/logo.png" target="_blank" style="width: 50px;" /></a>
-                        <span>E-Ticarət sistemləri ilə hazırlanmışdır</span>
+                        @lang('footer.Brand Signature', ['brand' => '<a href="https://inova.az/" target="_blank" style="vertical-align: baseline;"><img src="https://inova.az/image/logo.png" target="_blank" style="width: 50px;"></a>' ])
                     </div>
                     
                     <!--<p>Bu sayt <a href="https://www.inova.az">Inova.az</a>® Qabaqcıl E-Ticarət sistemləri ilə hazırlanmışdır.</p>-->

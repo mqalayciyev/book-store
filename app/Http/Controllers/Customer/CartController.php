@@ -64,7 +64,7 @@ class CartController extends Controller
                                                     77
                                                 );
                                             "
-                                            >' . $productCartItem->price . '‎ ₼<!----></span
+                                            >' . $productCartItem->price . '‎ $<!----></span
                                         ><!----><!---->
                                     </div>
                                     <!---->
@@ -122,9 +122,9 @@ class CartController extends Controller
                 <div class="right">
                     <!---->
                     <div>
-                        <span>Ümumi qiymət:</span
+                        <span>' . __('content.Total') .': </span
                         ><span class="total"
-                            >' . Cart::total() . ' ₼</span
+                            >' . Cart::total() . ' $</span
                         >
                     </div>
                 </div>
@@ -140,23 +140,13 @@ $output .= '<a href="' . route('payment') . '"><button type="button" class="Chec
 <div class="CartSummaryInfo">
 <div class="CartBox">
     <div class="CartBox-Title">
-        <div class="Title">Sifariş detalları</div>
-    </div>
-    <div class="CartBox-Content">
-        <div class="Content">
-            <div>
-                <span
-                    >' . __('content.SHIPPING') . '</span
-                ><em>' . __('content.Free Shipping') . '</em>
-            </div>
-            <!---->
-        </div>
+        <div class="Title">'.__('content.Order details').'</div>
     </div>
     <div class="CartBox-Footer">
         <div class="Footer">
             <div>
-                <strong>Ümumi ödəniləcək:</strong
-                ><strong>' . Cart::total() . ' ₼</strong>
+                <strong>'.__('content.Total will be paid').':</strong
+                ><strong>' . Cart::total() . ' $</strong>
             </div>
         </div>
     </div>
@@ -172,7 +162,7 @@ $output .= '<a href="' . route('payment') . '"><button type="button" class="Chec
         } else {
             $output .= '<div data-v-59955730="" class="LayoutMP-Main"><div data-v-0faeac38="" data-v-59955730="" class="Wrapper">
                 <div data-v-0faeac38="" class="EmptyCart"><i data-v-0faeac38="" class="fa fa-shopping-bag"></i>
-                <span data-v-0faeac38="">Səbətinizdə heç bir məhsul yoxdur</span></div></div></div>';
+                <span data-v-0faeac38="">'.__('content.There are no products in your cart').'</span></div></div></div>';
         }
 
         return $output;
@@ -260,7 +250,7 @@ $output .= '<a href="' . route('payment') . '"><button type="button" class="Chec
                 $output .= $productCartItem->options->image ? asset('img/products/' . $productCartItem->options->image) : 'http://via.placeholder.com/1200x1200?text=ProductPhoto';
                 $output .= '"> </div>';
                 $output .= '<div class="product-body">
-                                    <h3 class="product-price">' . $productCartItem->price . ' ₼
+                                    <h3 class="product-price">' . $productCartItem->price . ' $
                                     <span class="qty"> x ' . $productCartItem->qty . '</span></h3>
                                     <h2 class="product-name">
                                     <a href="' . route('product', $productCartItem->options->slug) . '">

@@ -13,7 +13,7 @@
         .cart_div {
             position: fixed;
             right: 0;
-            bottom: 0;
+            bottom: 80px;
             z-index: 1;
         }
 
@@ -122,13 +122,15 @@
             <ul class="header-btns">
                 <!-- Cart -->
                 <li class="header-cart dropdown default-dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                    <a href="{{ route('cart') }}" class="dropdown-toggle">
                         <div class="header-btns-icon">
                             <i class="fa fa-shopping-cart"></i>
                             <span class="qty show_cartCount">{{ Cart::count() }}</span>
                         </div>
                     </a>
-                    <div class="dropdown-menu">
+
+                    
+                    {{-- <div class="dropdown-menu">
                         <div id="shopping-cart" class="view_cart">
                             @if(count(Cart::content())>0)
                                 <div class="shopping-cart-btns">
@@ -141,7 +143,9 @@
                                 @lang('header.Empty, there is no product')
                             @endif
                         </div>
-                    </div>
+                    </div> --}}
+
+
                 </li>
                 <!-- /Cart -->
             </ul>
@@ -155,7 +159,9 @@
                         <h2 class="title">@lang('content.Deals Of The Day')</h2>
                     </div>
                 </div>
-                <div class="products_dotd col-md-12"></div>
+                <div class="col-md-12 products_dotd">
+                </div>
+                
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -163,20 +169,23 @@
                         <h2 class="title">@lang('content.Latest Products')</h2>
                     </div>
                 </div>
-                <div class="products_l col-md-12"></div>
-                <div class="text-center col-md-12" style="margin: 10px 0px 20px 0px;">
-                    <button type="submit" class="primary-btn more-products" style="width: 20rem;">
-                        <i class="fa fa-arrow-down"></i> Daha Çox Göstər
-                    </button>
+                <div class="col-md-12 products_l">
                 </div>
+                
+
+
+                
             </div>
-            <div class="row your_products">
+            <div class="row your_products" >
                 <div class="col-md-12">
                     <div class="section-title">
-                        <h2 class="title">Sizin baxdığınız</h2>
+                        <h2 class="title">@lang('content.You are Watching')</h2>
                     </div>
                 </div>
-                <div class="products_pfy col-md-12"></div>
+                <div class="col-md-12 products_pfy">
+                </div>
+                
+                
             </div>
         </div>
         <!-- /container -->

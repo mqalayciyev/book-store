@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-title">
-                        <h2 class="title">Şifrəni dəyiş</h2>
+                        <h2 class="title">@lang('content.Forgot my password')</h2>
                         <div class="pull-right">
                             <div class="product-slick-dots-2 custom-dots">
                             </div>
@@ -27,14 +27,14 @@
                         {{ csrf_field() }}
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="email">Email</label>
+                                <label for="email">@lang('content.Email')</label>
                                 <input class="input" type="email" name="email" required
                                        placeholder="@lang('content.Enter your email')">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button type="submit" class="primary-btn">Şifrəni dəyiş</button>
+                                <button type="submit" class="primary-btn">@lang('content.Change Password')</button>
                             </div>
                         </div>
                     </form>

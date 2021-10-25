@@ -13,6 +13,17 @@
 <body>
 @include('customer.layouts.partials.header')
 @yield('content')
+
+<div class="whatsapp-button">
+    <a href="https://wa.me/{{ old('mobile', $website_info->mobile) }}" target="_blank" class="wp-button-circle">
+        <span class="text">@lang('content.Write to us')</span>
+        <div class="img-button">
+            <img src="https://www.vectorico.com/download/social_media/Whatsapp-Icon.jpg" alt="whatsapp-button" >
+        </div>
+    </a>
+</div>
+
+
 @include('customer.layouts.partials.footer')
 
 <!-- jQuery Plugins -->

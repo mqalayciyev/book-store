@@ -75,9 +75,9 @@
                                 @endif
                             </div>
                             <h2 class="product-name">{{ $product->product_name }}</h2>
-                            <h3 class="product-price">{{ $product->sale_price }}₼
+                            <h3 class="product-price">{{ $product->sale_price }}$
                                 @if($product->discount>0)
-                                    <del class="product-old-price">{{ $product->retail_price }}₼</del>
+                                    <del class="product-old-price">{{ $product->retail_price }}$</del>
                                 @endif
                             </h3>
                             <div>
@@ -178,8 +178,8 @@
                                             
                                         </div>
                                         <div class="col-md-6">
-                                            <h4 class="text-uppercase">ŞƏRHİNİZİ YAZIN</h4>
-                                            <p>Elektron poçtunuz dərc olunmayacaq.</p>
+                                            <h4 class="text-uppercase">@lang('content.WRITE YOUR COMMENT')</h4>
+                                            <p>@lang('content.Your email will not be published.')</p>
                                             
                                             <form action="{{ route('product.review') }}" class="review-form" method="POST">
                                                 @csrf
@@ -187,26 +187,26 @@
                                                     
                                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                                     @auth
-                                                        <input class="input" name="name" value="{{  auth()->user()->first_name . " " . auth()->user()->last_name }}" type="text" placeholder="Your Name"/>
+                                                        <input class="input" name="name" value="{{  auth()->user()->first_name . " " . auth()->user()->last_name }}" type="text" placeholder="@lang('content.Your name')"/>
                                                     @endauth
                                                     @guest
-                                                        <input class="input" name="name" type="text" placeholder="Your Name"/>
+                                                        <input class="input" name="name" type="text" placeholder="@lang('content.Your name')"/>
                                                     @endguest
                                                 </div>
                                                 <div class="form-group">
                                                     @auth
-                                                        <input class="input" name="email" value="{{  auth()->user()->email }}" type="email" placeholder="Email Address"/>
+                                                        <input class="input" name="email" value="{{  auth()->user()->email }}" type="email" placeholder="@lang('content.Email')"/>
                                                     @endauth
                                                     @guest
-                                                        <input class="input" name="email" type="email" placeholder="Email Address"/>
+                                                        <input class="input" name="email" type="email" placeholder="@lang('content.Email')"/>
                                                     @endguest
                                                 </div>
                                                 <div class="form-group">
-                                                    <textarea class="input" name="review" placeholder="Your review"></textarea>
+                                                    <textarea class="input" name="review" placeholder="@lang('content.Your review')"></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="input-rating">
-                                                        <strong class="text-uppercase">Your Rating: </strong>
+                                                        <strong class="text-uppercase">@lang('content.Your rate: ')</strong>
                                                         <div class="stars">
                                                             <input type="radio" id="star5" name="rating" value="5"/><label for="star5"></label>
                                                             <input type="radio" id="star4" name="rating" value="4"/><label for="star4"></label>
@@ -216,7 +216,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button class="primary-btn">Submit</button>
+                                                <button class="primary-btn">@lang('content.Send')</button>
                                             </form>
                                         </div>
                                     </div>
@@ -242,14 +242,13 @@
         <div class="container">
             <!-- row -->
             <div class="row">
-                <!-- section title -->
                 <div class="col-md-12">
                     <div class="section-title">
-                        <h2 class="title">@lang('content.Picked For You')</h2>
+                        <h2 class="title">@lang('content.Related products')</h2>
                     </div>
                 </div>
-                <!-- section title -->
-                <div class="products_pfy  col-md-12"></div>
+                <div class="col-md-12 products_rp">
+                </div>
             </div>
             <!-- /row -->
         </div>
@@ -261,13 +260,15 @@
 @section('footer')
     <script>
         $(function () {
-            products('products_pfy');
+            products('products_rp');
             
             function products(dynamic_product) {
+                let category = "{{ $category['slug'] }}"
+                let product_id = "{{ $product->id }}"
                 $.ajax({
                     url: '{{ route("homepage.products") }}',
                     method: 'GET',
-                    data: {product: dynamic_product},
+                    data: {product: dynamic_product, category, product_id},
                     success: function (data) {
                         $('.' + dynamic_product).html(data);
                     }

@@ -103,6 +103,15 @@ class OrderController extends Controller
                     ]);
                 }
             }
+            elseif(request('status') == 'Order completed'){
+                $cartProduct = CartProduct::select('product_id', 'piece')->where('cart_id', $cart_id)->get();
+                foreach ($cartProduct as $value) {
+                    $product = Product::where('id', $value->id)->first();
+                    $product->update([
+                        'stok_piece' => $product->stok_piece - $value->qty
+                    ]);
+                }
+            }
             $entry->update($data);
         }
         $order = Order::where('id', $id)->first();

@@ -122,15 +122,10 @@ class UserController extends Controller
 
     public function sign_in()
     {
-        $messages = [
-            'email.required'  => 'Email boş ola bilməz.',
-            'email.email'  => 'Düzgün email forması daxil edin.',
-            'password.required'  => 'Şifrə boş ola bilməz.',
-        ];
         $this->validate(request(), [
             'email' => 'required|email',
             'password' => 'required'
-        ], $messages);
+        ]);
 
         $credentials = [
             'email' => request('email'),
@@ -197,13 +192,7 @@ class UserController extends Controller
             'last_name' => 'required',
             'email' => 'required',
             'mobile' => 'required',
-        ], [
-            'first_name.required' => 'Ad daxil edilmeyib.',
-            'last_name.required' => 'Soyad daxil edilmeyib.',
-            'email.required' => 'Email daxil edilmeyib.',
-            'mobile.required' => 'Mobile nomre daxil edilmeyib.',
-            
-            ]);
+        ]);
         if ($validator->fails()) {
             return response()->json(['status' => 'error', 'message' => $validator->errors()]);
         }
@@ -215,30 +204,24 @@ class UserController extends Controller
             'mobile' => request('mobile'),
         ]);
         UserDetail::updateOrCreate(['user_id' =>  auth()->id()], [
-            'country' => request('country'),
-            'state' => request('state'),
-            'city' => request('city'),
-            'zip_code' => request('zip_code'),
-            'address' => request('address'),
+            'phone' => request('phone'),
         ]);
-        return response()->json(['status' => 'success']);
+        return response()->json(['status' => 'success', 'message' => __('content.Updated')]);
     }
     public function form_detail(){
+
         $validator = Validator::make(request()->all(), [
             'country' => 'required',
             'state' => 'required',
             'city' => 'required',
             'address' => 'required',
-        ], [
-            'country.required' => 'Ölkə daxil edilmeyib.',
-            'state.required' => 'Paytaxt daxil edilmeyib.',
-            'city.required' => 'Şəhər daxil edilmeyib.',
-            'address.required' => 'Address daxil edilmeyib.',
-            
-            ]);
+            'zip_code' => 'required',
+        ]);
+
         if ($validator->fails()) {
             return response()->json(['status' => 'error', 'message' => $validator->errors()]);
         }
+
         UserDetail::updateOrCreate(['user_id' =>  auth()->id()], [
             'country' => request('country'),
             'state' => request('state'),
@@ -246,14 +229,13 @@ class UserController extends Controller
             'zip_code' => request('zip_code'),
             'address' => request('address'),
         ]);
-        return response()->json(['status' => 'success']);
+
+        return response()->json(['status' => 'success', 'message' => __('content.Updated')]);
     }
     public function form_password(){
         
-        
         $user = Auth::user();
 
-        
         $validator = Validator::make(request()->all(), [
             'password'              => 'required|min:6',
             'password_confirmation' => 'required|same:password',
@@ -262,13 +244,7 @@ class UserController extends Controller
                     return $fail("Kohne sifre duzgun daxil edilmeyib.");
                 }
             }]
-        ], [
-            'old_password.required' => 'Kohne sifre qeyd edilmeyib.',
-            'password.required' => 'Sifre qeyd edilmeyib.',
-            'password_confirmation.required' => 'Sifre(tekrar) qeyd edilmeyib.',
-            'password_confirmation.same' => 'Sifreler uygun deyil.',
-            
-            ]);
+        ]);
         
         if ($validator->fails()) {
             return response()->json(['status' => 'error', 'message' => $validator->errors()]);
@@ -277,7 +253,9 @@ class UserController extends Controller
         User::find(auth()->id())->update([
             'password'=> Hash::make(Input::get('password')),
         ]);
-        return response()->json(['status' => 'success']);
+
+        return response()->json(['status' => 'success', 'message' => __('content.Updated')]);
+
     }
     public function reset_password_form(){
         return view('customer.pages.user.reset_password');

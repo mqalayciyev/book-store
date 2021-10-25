@@ -17,5 +17,6 @@ return [
     'Enter Email Address' => 'Email adresinizi qeyd edin',
     'All rights reserved' => 'Bütün hüquqlar qorunur',
     'Your Address' => 'Sizin Ünvanınız',
+    'Brand Signature' => 'Bu sayt :brand E-Ticarət sistemləri ilə hazırlanmışdır',
 
 ];

@@ -47,6 +47,8 @@ class HomepageController extends Controller
             else{
                 $length = request('length');
             }
+
+            
             
 
             $products = Product::select('product.*')
@@ -55,7 +57,13 @@ class HomepageController extends Controller
                 ->orderBy('updated_at', 'desc')
                 ->take($length)
                 ->get();
-            return view('customer.pages.home_products', compact('products'));
+
+            $show_more = count($products) > 4 ? '<div class="text-center col-md-12" style="margin: 10px 0px 20px 0px;">
+            <button type="submit" class="primary-btn more-products" style="width: 20rem;">
+                <i class="fa fa-arrow-down"></i>'.__('content.Show More').'
+            </button>
+        </div>' : '';
+            return view('customer.pages.home_products', compact('products', 'show_more'));
         }
         if ($dynamic_product == 'products_pfy') {
             $your_products = explode("-", session('your_products'));
@@ -73,13 +81,22 @@ class HomepageController extends Controller
                     array_push($products, $products2[0]);
                 }
             }
-            if(count($products) > 0){
-                return view('customer.pages.home_products', compact('products'));
-            }
-            else{
-                echo "empty";
-            }
+            return view('customer.pages.home_products', compact('products'));
             
+        }
+        if ($dynamic_product == 'products_rp') {
+            $product_id = request('product_id');
+            $category = request('category');
+            $products = Product::select('product.*')
+                ->leftJoin('product_detail', 'product_detail.product_id', 'product.id')
+                ->leftJoin('category_product', 'category_product.product_id', 'product.id')
+                ->leftJoin('category', 'category.id', 'category_product.category_id')
+                ->where('category.slug', $category)
+                ->where('product.id', '!=', $product_id)
+                ->orderBy('updated_at', 'desc')
+                ->take(12)
+                ->get();
+            return view('customer.pages.single_product', compact('products'));
         }
     }
 
@@ -111,7 +128,7 @@ class HomepageController extends Controller
             'email' => request('email'),
             'message' => request('message'),
         ]);
-        return back()->with(['message_type' => 'success', 'message' => 'Cavabınız üçün təşəkkürlər.']);
+        return back()->with(['message_type' => 'success', 'message' => __('content.Thank you for your feedback')]);
     }
 
     public function invoice(){

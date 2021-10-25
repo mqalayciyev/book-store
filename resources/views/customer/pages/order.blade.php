@@ -6,6 +6,7 @@
         <div class="container">
             <ul class="breadcrumb">
                 <li><a href="/">@lang('content.Home')</a></li>
+                <li><a href="{{ route('orders') }}">@lang('content.Orders')</a></li>
                 <li class="active">@lang('content.Order')</li>
             </ul>
         </div>
@@ -38,27 +39,27 @@
                                     <a href="{{ route('product',$cart_product->product->slug) }}">{{ $cart_product->product->product_name }}</a>
                                 </td>
                                 <td class="price text-center">
-                                    <strong>{{ $cart_product->product->sale_price }}‎ ₼</strong><br>
+                                    <strong>{{ $cart_product->product->sale_price }}‎ $</strong><br>
                                 </td>
                                 <td class="qty text-center">
                                     {{ $cart_product->piece }}
                                 </td>
                                 <td class="total text-center">
-                                    <strong class="primary-color">{{ $cart_product->amount*$cart_product->piece }} ₼</strong></td>
+                                    <strong class="primary-color">{{ $cart_product->amount*$cart_product->piece }} $</strong></td>
                                 <td>{{ $order->created_at }}</td>
                             </tr>
                         @endforeach
                         </tbody>
                         <tfoot>
-                        <tr>
+                        {{-- <tr>
                             <th class="empty" colspan="3"></th>
                             <th>@lang('content.SHIPPING')</th>
                             <td colspan="2">@lang('content.Free Shipping')</td>
-                        </tr>
+                        </tr> --}}
                         <tr>
                             <th class="empty" colspan="3"></th>
                             <th>@lang('content.TOTAL')</th>
-                            <th colspan="2" class="total">{{ number_format( $order->order_amount + ($order->order_amount * config('cart.tax')/100), 2) }} ₼</th>
+                            <th colspan="2" class="total">{{ number_format( $order->order_amount + ($order->order_amount * config('cart.tax')/100), 2) }} $</th>
                         </tr>
                         </tfoot>
                     </table>

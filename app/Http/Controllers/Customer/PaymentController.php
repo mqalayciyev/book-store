@@ -37,34 +37,39 @@ class PaymentController extends Controller
 
     public function pay()
     {
+        $this->validate(request(), [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+            'mobile' => 'required',
+            'country' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'zip_code' => 'required',
+        ]);
+
         $paymentMethod =  request('payment_method');
         $order = request()->all();
 
         if($paymentMethod == 1){
-            $order['bank'] = 'Qapıda Ödəmə';
+            $order['bank'] = 'Payment at the door';
         }
         elseif($paymentMethod == 2){
-            $order['bank'] = 'Kapital Bank';
+            $order['bank'] = 'Bank Transfer';
         }
         
         $order['cart_id'] = session('active_cart_id');
         $order['installment_number'] = 1;
-        $order['status'] = 'Your order has been received';
+        $order['status'] =  'Your order has been received';
         $order['order_amount'] = Cart::subtotal();
         $user = User::where('id', auth()->id())->first();
-        foreach (Cart::content() as $value) {
-            $product = Product::where('id', $value->id)->first();
-            $product->update([
-                'stok_piece' => $product->stok_piece - $value->qty
-            ]);
-            
-        }
+
         Order::create($order);
         
         $cart = CartModel::where('id', session('active_cart_id'))->first();
         $data =[
             'total_amount' => Cart::subtotal(),
-            'payment_status' => 'Sifarişiniz alındı',
+            'payment_status' => __('content.Your order has been received'),
             'order_date' => date('Y-m-d H:i:s'),
             'payment_date' => date('Y-m-d H:i:s'),
             'client_firstname' => $order['first_name'],

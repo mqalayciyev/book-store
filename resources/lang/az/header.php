@@ -29,9 +29,11 @@ return [
     'Empty, there is no product' => 'Səbət boşdur',
     'View Cart' => 'Səbətə Bax',
     'Categories' => 'Kateqoriyalar',
-    'Home' => 'ANA SƏHİFƏ',
+    'Home' => 'Ana Səhifə',
     'Shop' => 'Mağaza',
     'Sales' => 'Satışlar',
     'Orders' => 'Sifarişlər',
+    'My Wishlist' => 'İstək Siyahım',
+    'Compare' => 'Müqayisə et',
 
 ];

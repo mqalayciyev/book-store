@@ -27,7 +27,7 @@
                         {{ csrf_field() }}
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="email">Email</label>
+                                <label for="email">@lang('content.Email')</label>
                                 <input class="input" type="email" name="email" value="{{ old('email') }}"
                                        placeholder="@lang('content.Enter your email')">
                             </div>
@@ -40,7 +40,7 @@
                             <div class="col-md-12">
                                 <div class="col-md-6" style="padding-left: 0px">
                                     <label for="remember_me" style="vertical-align: middle;">@lang('content.Remember me')</label>
-                                    <input type="checkbox" class="input-checkbox" name="remember_me" checked id="remember_me"> <a href="/user/reset-password" style="float: right;">Şifrəmi unutdum</a><br><br>
+                                    <input type="checkbox" class="input-checkbox" name="remember_me" checked id="remember_me"> <a href="/user/reset-password" style="float: right;">@lang('content.Forgot my password')</a><br><br>
                                 </div>
                             </div>
                         </div>

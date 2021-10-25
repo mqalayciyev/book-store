@@ -12,37 +12,17 @@
                     <ul class="header-btns clearfix " style="width: 100%;">
                         <li>
                             <div class="header-logo" style="max-width: 38vw;">
-                                <a class="logo" href="/">
+                                <a class="logo" href="{{ route('homepage') }}">
                                     <img src="{{ asset('img/' . old('logo', $website_info->logo)) }}" alt="">
                                 </a>
                             </div>
                         </li>
-                        <li style="float: right; margin-left: 15px;">
+                        <li style="float: right; ">
                             <div class="nav-toggle " style="padding: 0px">
                                 <button class="nav-toggle-btn main-btn icon-btn"><i class="fa fa-bars"></i></button>
                             </div>
                         </li>
-                        <li class="header-language dropdown default-dropdown" style="float: right">
-                            <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
-                                <div class="text-uppercase header-btns-icon">
-                                    <img src="{{asset('img/flag/'.App::getLocale().'.png')}}" width="25px" height="20px" alt="language">
-                                </div>
-                            </div>
-                            <ul class="custom-menu">
-                                @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                    @if (LaravelLocalization::getCurrentLocaleName() !== $properties['name'])
-                                        <li>
-                                            <a rel="alternate" hreflang="{{ $localeCode }}"
-                                                href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                                <img src="{{ asset('img/flag/' . $localeCode . '.png') }}" width="25px"
-                                                    height="20px" alt="language">
-                                                {{ $properties['name'] }}
-                                            </a>
-                                        </li>
-                                    @endif
-                                @endforeach
-                            </ul>
-                        </li>
+
                         <li class="header-account dropdown" style="float: right;">
                             <div class="dropdown-toggle" role="button" data-toggle="dropdown">
                                 <div class="header-btns-icon">
@@ -51,11 +31,13 @@
                             </div>
                             <ul class="dropdown-menu" style="margin: 0px;">
                                 @auth
-                                    <li><a href="{{ route('orders') }}"><i class="fa fa-user-o"></i>
-                                            @lang('header.Orders') </a></li>
-                                    <li><a href="/my_wish_list"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
-                                    <li><a href="/compare"><i class="fa fa-exchange"></i> Compare</a></li>
-                                    <li><a href="/cart"><i class="fa fa-check"></i> Checkout</a></li>
+                                <li><a href="{{ route('user.my_account') }}"><i class="fa fa-user-o"></i>@lang('header.My Account')</a></li>
+                                <li><a href="{{ route('orders') }}"><i class="fa fa-file-text"></i> @lang('header.Orders')
+                                    </a></li>
+                                    <li><a href="{{ route('my_wish_list') }}"><i class="fa fa-heart-o"></i>
+                                            @lang('header.My Wishlist')</a></li>
+                                    <li><a href="{{ route('compare') }}"><i class="fa fa-exchange"></i>
+                                            @lang('header.Compare')</a></li>
                                     <li><a href="#"
                                             onclick="event.preventDefault(); document.getElementById('logout_form').submit();"><i
                                                 class="fa fa-sign-out"></i> @lang('header.Sign Out')</a></li>
@@ -112,6 +94,28 @@
                                 </div>
                             </div>
                         </li>
+                        <li class="header-language dropdown default-dropdown" style="float: right">
+                            <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
+                                <div class="text-uppercase header-btns-icon">
+                                    <img src="{{ asset('img/flag/' . App::getLocale() . '.png') }}" width="25px"
+                                        height="20px" alt="language">
+                                </div>
+                            </div>
+                            <ul class="custom-menu">
+                                @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                    @if (LaravelLocalization::getCurrentLocaleName() !== $properties['name'])
+                                        <li>
+                                            <a rel="alternate" hreflang="{{ $localeCode }}"
+                                                href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                                <img src="{{ asset('img/flag/' . $localeCode . '.png') }}"
+                                                    width="25px" height="20px" alt="language">
+                                                {{ $properties['name'] }}
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </li>
 
                     </ul>
                     <div class="header-search" style="width: 100%">
@@ -128,13 +132,12 @@
             <div class="pull-left desktop-navbar col-md-7 p-0">
 
                 <!-- Logo -->
-
-                <!-- /Logo -->
                 <div class="header-logo col-md-4 p-0" style="width: 150px; margin-right: 0px;">
-                    <a class="logo" href="/">
+                    <a class="logo" href="{{ route('homepage') }}">
                         <img src="{{ asset('img/' . old('logo', $website_info->logo)) }}" alt="">
                     </a>
                 </div>
+                <!-- /Logo -->
 
                 <!-- Search -->
                 <div class="header-search col-md-8 text-center">
@@ -145,16 +148,16 @@
                         <button class="search-btn" type="submit" value="1"><i class="fa fa-search"></i></button>
                     </form>
                 </div>
-                
-
                 <!-- /Search -->
+
             </div>
             <div class="pull-right desktop-navbar col-md-5 p-0">
                 <ul class="header-btns">
                     <li class="header-language dropdown default-dropdown">
                         <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
                             <div class="header-btns-icon" style="margin: 0">
-                                <img src="{{asset('img/flag/'.App::getLocale().'.png')}}" width="25px" height="20px" alt="language">
+                                <img src="{{ asset('img/flag/' . App::getLocale() . '.png') }}" width="25px" height="20px"
+                                    alt="language">
                             </div>
                         </div>
                         <ul class="custom-menu">
@@ -190,11 +193,12 @@
                         @endguest
                         <ul class="custom-menu">
                             @auth
-                                <li><a href="{{ route('orders') }}"><i class="fa fa-user-o"></i> @lang('header.Orders')
+                            <li><a href="{{ route('user.my_account') }}"><i class="fa fa-user-o"></i>@lang('header.My Account')</a></li>
+                                <li><a href="{{ route('orders') }}"><i class="fa fa-file-text"></i> @lang('header.Orders')
                                     </a></li>
-                                <li><a href="/my_wish_list"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
-                                <li><a href="/compare"><i class="fa fa-exchange"></i> Compare</a></li>
-                                <li><a href="/cart"><i class="fa fa-check"></i> Checkout</a></li>
+                                <li><a href="{{ route('my_wish_list') }}"><i class="fa fa-heart-o"></i> @lang('header.My Wishlist')</a></li>
+                                <li><a href="{{ route('compare') }}"><i class="fa fa-exchange"></i>
+                                        @lang('header.Compare')</a></li>
                                 <li><a href="#"
                                         onclick="event.preventDefault(); document.getElementById('logout_form').submit();"><i
                                             class="fa fa-sign-out"></i> @lang('header.Sign Out')</a></li>
@@ -315,6 +319,7 @@
                 <span class="menu-header">Menu <i class="fa fa-bars"></i></span>
                 <ul class="menu-list">
                     <li><a href="/">@lang('header.Home')</a></li>
+                    <li><a href="{{ route('compare') }}">@lang('header.Compare')</a></li>
                     {{-- <li><a href="javascript:void(0);">@lang('header.Shop')</a></li> --}}
                     {{-- <li><a href="/newproducts">@lang('header.New Products')</a></li> --}}
                     {{-- <li><a href="/discounted">@lang('header.Discounted Products')</a></li> --}}
